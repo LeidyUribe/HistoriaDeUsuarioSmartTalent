@@ -1,12 +1,28 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
+import { TaskListComponent } from './task-list/task-list.component';
+import { TaskFormComponent } from './task-form/task-form.component';
+import { TaskService } from './task.service';
+import { Task } from './models/task.model';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [TaskFormComponent, TaskListComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
 })
+
 export class AppComponent {
-  title = 'smart-app';
+  alertMessage: string | null = null;
+  alertType: any = null;
+
+  constructor(
+    private taskService: TaskService) {}
+
+  title = 'Gestión de tareas';
+
+  onTaskAdded(task: Task): void {
+    task.id = this.taskService.getTasks().length + 1;
+    this.taskService.addTask(task);
+  }
 }
