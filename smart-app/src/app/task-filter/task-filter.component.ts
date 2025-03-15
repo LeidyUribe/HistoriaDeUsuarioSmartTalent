@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task-filter',
-  imports:[CommonModule],
+  imports: [CommonModule],
   templateUrl: './task-filter.component.html',
-  styleUrls: ['./task-filter.component.css']
+  styleUrls: ['./task-filter.component.css'],
 })
 export class TaskFilterComponent {
   @Output() filterChange = new EventEmitter<string>();
@@ -13,7 +13,7 @@ export class TaskFilterComponent {
   filterOptions = [
     { value: 'all', label: 'Todas' },
     { value: 'pending', label: 'Pendientes' },
-    { value: 'completed', label: 'Completadas' }
+    { value: 'completed', label: 'Completadas' },
   ];
 
   selectedFilter: string = 'all';
