@@ -1,8 +1,12 @@
-.text-success {
-  color: green;
+.bg-success {
+  color: white;
 }
 
-.text-warning {
-  color: orange;
+.bg-warning {
+  color: black;
+}
+
+.action{
+  margin-left: 5px !important;
 }
 
