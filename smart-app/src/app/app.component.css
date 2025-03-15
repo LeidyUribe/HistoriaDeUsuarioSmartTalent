@@ -1,3 +1,7 @@
+.title{
+  text-align: center;
+  color: red;
+}
 .alert-custom {
     margin-top: 20px;
     margin-bottom: 20px;

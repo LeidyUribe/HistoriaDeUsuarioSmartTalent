@@ -8,27 +8,35 @@
       <div>
         <h5>{{ task.title }}</h5>
         <p>{{ task.description }}</p>
-        <small
-          [ngClass]="{
-            'text-success': task.completed,
-            'text-warning': !task.completed
-          }"
-        >
-          {{ task.completed ? "Completada" : "Pendiente" }}
-        </small>
-      </div>
-      <div>
+
+        <strong>
+          <span
+            [ngClass]="{
+              'text-success': task.completed,
+              'text-warning': !task.completed
+            }"
+          >
+            {{ task.completed ? "Completada" : "Pendiente" }}
+          </span>
+        </strong>
+
+        <small>Cambiar estado:
         <input
           type="checkbox"
           [checked]="task.completed"
           (change)="onTaskStatusChange(task.id, !task.completed)"
         />
+      </small>
+      </div>
+      <div>
+        <!-- <div class="deleteTask"> -->
         <button
           class="btn btn-danger btn-sm ml-2"
           (click)="onTaskDelete(task.id)"
         >
           Eliminar
         </button>
+        <!-- </div> -->
       </div>
     </li>
   </ul>
