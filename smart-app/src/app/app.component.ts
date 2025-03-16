@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TaskListComponent } from './task-list/task-list.component';
-import { TaskFormComponent } from './task-form/task-form.component';
-import { TaskService } from './task.service';
+import { TaskListComponent } from '.././app/tasks/task-list/task-list.component';
+import { TaskFormComponent } from '.././app/tasks/task-form/task-form.component';
+import { TaskFilterComponent } from '.././app/tasks/task-filter/task-filter.component';
+
+import { TaskService } from '../services/task.service';
 import { Task } from './models/task.model';
-import { TaskFilterComponent } from './task-filter/task-filter.component';
 
 @Component({
   selector: 'app-root',

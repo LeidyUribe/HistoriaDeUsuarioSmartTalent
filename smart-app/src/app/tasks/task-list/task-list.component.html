@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h2>Lista de Tareas</h2>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Título</th>
+        <th scope="col">Descripción</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of filteredTasks; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>
+          <span [ngClass]="{'badge bg-success': task.completed, 'badge bg-warning': !task.completed}">
+            {{ task.completed ? 'Completada' : 'Pendiente' }}
+          </span>
+        </td>
+        <td>
+          <div class="btn-group" role="group">
+            <button
+              class="btn btn-sm"
+              [ngClass]="{'btn-success': !task.completed, 'btn-secondary': task.completed}"
+              (click)="onTaskStatusChange(task.id, !task.completed)"
+            >
+              {{ task.completed ? 'Marcar como Pendiente' : 'Marcar como Completada' }}
+            </button>
+            
+            <button class="btn btn-danger btn-sm action" (click)="onTaskDelete(task.id)">Eliminar</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
