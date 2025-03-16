@@ -13,16 +13,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class TaskFormComponent {
   @Output() taskAdded = new EventEmitter<Task>();
-  taskForm: FormGroup; // <-- Define el formulario reactivo
+  taskForm:any; // <-- Define el formulario reactivo
 
   task: Task = { id: 0, title: '', description: '', completed: false };
 
-  constructor(private fb: FormBuilder) {
+  private initForm(): void {
     this.taskForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(6)]], // <-- Título requerido y mínimo 6 caracteres
-      description: ['', Validators.required], // <-- Descripción requerida
-      completed: [false], // <-- Estado de la tarea (no requiere validación)
+      title: ['', [Validators.required, Validators.minLength(6)]],
+      description: ['', Validators.required],
+      completed: [false],
     });
+  }
+
+  constructor(private fb: FormBuilder) {
+    this.initForm();
   }
 
   onSubmit(): void {

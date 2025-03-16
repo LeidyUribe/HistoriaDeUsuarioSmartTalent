@@ -13,8 +13,8 @@ export class TaskListComponent implements OnInit {
   @Input() filter: string = 'all'; // <-- Recibe el filtro como entrada
   tasks: Task[] = [];
 
-  @Output() statusChanged = new EventEmitter<string>();
-  @Output() taskDeleted = new EventEmitter<string>();
+  @Output() statusChanged = new EventEmitter<{ id: number, completed: boolean }>();
+  @Output() taskDeleted = new EventEmitter<number>();
 
   constructor(private taskService: TaskService) {}
 
@@ -25,23 +25,24 @@ export class TaskListComponent implements OnInit {
   }
 
   get filteredTasks(): Task[] {
-    if (this.filter === 'pending') {
-      return this.tasks.filter((task) => !task.completed);
-    } else if (this.filter === 'completed') {
-      return this.tasks.filter((task) => task.completed);
-    } else {
-      return this.tasks; // Mostrar todas las tareas
+    switch (this.filter) {
+      case 'pending':
+        return this.tasks.filter(task => !task.completed);
+      case 'completed':
+        return this.tasks.filter(task => task.completed);
+      default:
+        return this.tasks;
     }
   }
 
   onTaskStatusChange(id: number, completed: boolean): void {
     this.taskService.updateTaskStatus(id, completed);
-    this.statusChanged.emit('Estado de la tarea actualizado'); // <-- Emitir evento al componente principal
+    this.statusChanged.emit({ id, completed });// <-- Emitir evento al componente principal
   }
 
   onTaskDelete(id: number): void {
     this.taskService.deleteTask(id);
     this.tasks = this.taskService.getTasks();
-    this.taskDeleted.emit('Tarea eliminada correctamente'); // <-- Emitir evento al componente principal
+    this.taskDeleted.emit(id); // <-- Emitir evento al componente principal
   }
 }
